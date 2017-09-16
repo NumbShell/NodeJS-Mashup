@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  div(class="header")
+    h1 Twitter User Interface
+    p Welcome to the UI!
+    a(class="btn" href="/docs") Get Started
+  div(class="content")
+    p Data goes here.
+    ul
+      - each tweet in tweets
+        li= tweet

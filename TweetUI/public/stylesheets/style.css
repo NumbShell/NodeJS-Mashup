@@ -1,0 +1,42 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.header {
+  background-color: rgb(67,89,226);
+  color: white;
+  padding: 50px;
+}
+
+.header h1 {
+  font-size: 48px;
+  margin: 5px;
+}
+
+.content {
+}
+
+.btn {
+  display: inline-block;
+  padding: 20px;
+  background-color: rgb(26,139,240);
+  color: #fcfcfc;
+  font-weight:bolder;
+  border-radius: 3px;
+  cursor: pointer;
+  box-shadow: 2px 2px 1px #124765;
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+.btn:active {
+  background-color: rgb(25, 101, 188);
+  color: #f4f4f4;
+  text-decoration: none;
+}
+

@@ -1,6 +1,6 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  margin: 0;
+  margin: 0px;
 }
 
 a {
@@ -8,30 +8,38 @@ a {
 }
 
 .header {
-  background-color: rgb(67,89,226);
   color: white;
-  padding: 50px;
+  background-color: rgb(25, 101, 188) !important;
+  padding: 5%;
+}
+
+.header img {
+  max-width: 64px;
+  max-height: 64px;
 }
 
 .header h1 {
   font-size: 48px;
-  margin: 5px;
+  font-weight: bolder;
 }
 
 .content {
 }
 
+.spacer {
+  margin-top: 20%;
+}
+
 .btn {
   display: inline-block;
   padding: 20px;
-  background-color: rgb(26,139,240);
   color: #fcfcfc;
   font-weight:bolder;
   border-radius: 3px;
   cursor: pointer;
-  box-shadow: 2px 2px 1px #124765;
   margin-top: 20px;
   text-decoration: none;
+  border: 1px solid #f4f4f4;
 }
 
 .btn:active {
@@ -40,3 +48,96 @@ a {
   text-decoration: none;
 }
 
+.btn:hover {
+  background-color: white;
+  border: 1px solid rgb(25, 101, 188);
+  color: rgb(25, 101, 188);
+}
+
+
+.requests {
+  display: inline-block;
+  margin-top: 40px;
+}
+
+.requests p {
+  display: inline-block;
+}
+
+.requests .call {
+  border: 1px solid #adadad;
+  padding: 20px;
+}
+
+.responses {
+  display: inline-block;
+  margin-top: 40px;
+  border-left: 1px solid #aaaaaa;
+}
+
+
+textarea {
+  width: 450px;
+  height: 400px;
+}
+
+.person {
+  margin-bottom: 30px;
+  border-bottom: 1px solid #c8c8c8;
+}
+
+.person div img {
+  border-radius: 100%;
+}
+
+.person div img, .person div h4, .person div h6 {
+  display: inline-block;
+}
+
+.person div h6 {
+  margin-left: 5px;
+}
+
+.person div h4 {
+  font-weight: bold;
+}
+
+.person p {
+  margin-top: 10px;
+}
+
+.nickname {
+  color: grey;
+}
+
+.content {
+  margin: 50px;
+}
+
+.methods {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.get {
+  color: white;
+  padding: 10px;
+  background-color: rgb(0,100,205);
+  border-radius: 4px;
+}
+
+.post {
+  color: white;
+  padding: 10px;
+  background-color: rgb(70,165,70);
+  border-radius: 4px;
+}
+
+.delete {
+  color: white;
+  padding: 10px;
+  background-color: rgb(228,7,7);
+  border-radius: 4px;
+}

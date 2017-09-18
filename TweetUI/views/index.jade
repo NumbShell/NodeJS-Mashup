@@ -1,12 +1,18 @@
 extends layout
 
 block content
-  div(class="header")
-    h1 Twitter User Interface
-    p Welcome to the UI!
-    a(class="btn" href="/docs") Get Started
-  div(class="content")
-    p Data goes here.
-    ul
-      - each tweet in tweets
-        li= tweet
+  div(class="fluid-container")
+    nav(class="header navbar")
+      div
+        a(href="https://dev.twitter.com/")
+        h1 Mashup User Interface
+        a(class="btn" href="/docs") Get Started
+    div(class="content")
+      - for person in persons
+        div(class="person")
+          div
+            img(src=person.profile_image_url)
+            h4= person.name
+            span(class="nickname")
+              h6= person.screen_name
+          p= person.tweet

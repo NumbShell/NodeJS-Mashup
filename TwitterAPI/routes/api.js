@@ -34,10 +34,10 @@ router.route('/user/:user').get(function(req, res, next) {
     res.send("Raspberry Pi API");
 });
 
+/*
+ Return data on famous people and their most recent tweet.
+ */
 router.route('/famous/all').get(function(req, res, next) {
-    /*
-        Return data on famous people and their most recent tweet.
-     */
     database.get(dbName, viewUrl, {include_docs: true}).then(
         function(data, headers, status){
             res.json(data.data.rows);
@@ -46,17 +46,15 @@ router.route('/famous/all').get(function(req, res, next) {
         });
 });
 
+/*
+    Does not work yet.
+ */
+router.route('/delete/:id/rev/:rev').delete(function(req, res, next) {
+    console.log('delete route');
+    var id = req.params.id;
+    var rev = req.params.rev;
 
-router.route('/delete/:id').delete(function(req, res, next) {
-    /*
-     Retrive data from database (if exist) else make a twitter
-     request from the twitter.js routes (I think?)
-     */
-    console.log("DELETE - req.params.id " + req.params.id);
-    console.log("REQ " + req);
-
-    var id = req.body.id;
-    var rev = req.body.rev;
+    console.log(id, rev);
 
     database.del(dbName, id, rev).then(
         function(data, headers, status) {

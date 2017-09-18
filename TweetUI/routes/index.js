@@ -7,10 +7,6 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  /*
-       Make a request to the rpi API for some tweets
-       that you can show on the index page.
-     */
     request('http://localhost:8484/pi/api/famous/all', function(err, response, body) {
         if(err) throw err;
 
@@ -27,24 +23,41 @@ router.get('/docs', function(req, res, next) {
     res.render('docs');
 });
 
-router.get('/user',urlencodedParser, function(req, res, next) {
-    var url = 'http://localhost:8484/pi/api/twitter/user/' + req.body.name;
+/*
+    Add(Twitter data to db) and return new user.
+ */
+router.post('/user',urlencodedParser, function(req, res, next) {
+    var url = 'http://localhost:8484/pi/api/twitter/user/' + req.body.nickname;
+    console.log('/user req.body.id ' + req.body.nickname);
     request(url, function(err, response, body) {
         if(err) throw err;
         res.render('docs', {console: body});
     });
 })
 
+/*
+    Return all users in the API db.
+ */
 router.get('/famous/all',urlencodedParser, function(req, res, next) {
-    request('http://localhost:8484/pi/api/famous/all', function(err, response, body) {
+    var url = 'http://localhost:8484/pi/api/famous/all';
+    request(url, function(err, response, body) {
         if(err) throw err;
         res.render('docs', {console: body});
     });
 })
 
+/*
+    Does not work.
+ */
 router.get('/delete',urlencodedParser, function(req, res, next) {
     console.log('/delete');
-    var url = 'http://localhost:8484/pi/api/delete/' + req.body.rev;
+    var url = 'http://localhost:8484/pi/api/delete/' + req.body.id + '/rev/' + req.body.rev;
+
+    request.delete(url, function(err, response, body) {
+        if(err) throw err;
+        res.render('docs', {console: "[Done]"});
+    });
+    /*
     request({
         method: 'DELETE',
         url: url,
@@ -58,6 +71,7 @@ router.get('/delete',urlencodedParser, function(req, res, next) {
         if(err) throw err;
         res.render('docs', {console: body});
     });
+    */
 })
 
 

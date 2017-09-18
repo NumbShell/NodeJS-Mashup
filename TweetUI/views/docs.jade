@@ -9,36 +9,39 @@ block content
         div(class="requests col-md-7")
             div(class="call")
                 span(class="get methods") GET
-                p http://localhost:8484/pi/api/twitter/user/:user
-                p DESC: Return user(if exist in couchdb) else request user from Twitter and save in CouchDB.
-                form(method="GET" action="/user")
-                    input(type="text" name="name" placeholder="url")
-                    input(type="submit" value="Request")
-            br
-            div(class="call")
-                span(class="get methods") GET
                 p http://localhost:8484/pi/api/famous/all
                 br
                 p DESC: Return famous twitter users and their latest tweet.
                 form(method="GET" action="/famous/all")
                     input(type="submit" value="Request")
+            br
+            div(class="call")
+                span(class="get methods") GET
+                p http://localhost:8484/pi/api/twitter/user/:user
+                p DESC: Return user(if exist in couchdb) else request user from Twitter and save in CouchDB.
+                form(method="POST" action="/user")
+                    input(name="nickname" placeholder="nick")
+                    input(type="submit" value="Request")
+            br
+
             div(class="call")
                 span(class="delete methods") DELETE
-                p http://localhost:8484/pi/api/user/:id
+                p http://localhost:8484/pi/api/delete/:id/rev/:rev
                 br
                 p DESC: Delete a document by id.
                 form(method="GET" action="/delete")
                     input(type="text" name="id" placeholder="id")
                     input(type="text" name="rev" placeholder="rev")
                     input(type="submit" value="Request")
-            div(class="call")
-                span(class="post methods") POST
-                p http://localhost:8484/pi/api/user/:id
                 br
-                p DESC: Delete a document by id.
-                form(method="GET" action="/deleteUser")
-                    input(type="text" name="id" placeholder="id")
-                    input(type="text" name="rev" placeholder="rev")
-                    input(type="submit" value="Request")
+            //    div(class="call")
+                    span(class="post methods") POST
+                    p http://localhost:8484/pi/api/user/:id
+                    br
+                    p DESC: Delete a document by id.
+                    form(method="GET" action="/deleteUser")
+                        input(type="text" name="id" placeholder="id")
+                        input(type="text" name="rev" placeholder="rev")
+                        input(type="submit" value="Request")
         div(class="responses col-md-3")
             textarea= console

@@ -29,7 +29,9 @@ var urls = {
     'tweets': 'https://api.twitter.com/1.1/search/tweets.json?q=%40'
 }
 
-
+/*
+    Request user from Twitter's api if it does not already exist in the db.
+ */
 router.route('/user/:user').get(function(req, res, next) {
     database.get(dbName, viewUrl, {include_docs: true}).then(
         function(data, headers, status){
@@ -37,6 +39,7 @@ router.route('/user/:user').get(function(req, res, next) {
             var exists = false;
             var user = {};
             data.data.rows.map(function(doc) {
+                console.log("req.params.user " + req.params.user);
                 if(doc.doc.screen_name === req.params.user) {
                     exists = true;
                     user = doc;
@@ -45,9 +48,6 @@ router.route('/user/:user').get(function(req, res, next) {
             if(!exists) {
                 addUser();
             }else {
-                /*
-                    Send back the data from the DB.
-                 */
                 res.json(user);
             }
 
@@ -74,26 +74,13 @@ router.route('/user/:user').get(function(req, res, next) {
                 "profile_image_url": user.profile_image_url,
                 "joined": user.created_at
             }).then(function (data, headers, status) {
-                /*
-                    Retrive user from DB using their ID or REV
-                    and send that back to user!
-                 */
                 console.log("Success!");
-                res.json(data);
+                res.json("User added to db");
             }, function (err) {
                 console.log(err);
             });
-            //res.json(user);
         });
     }
-});
-
-router.route('/tweets/:user').get(function(req, res, next) {
-
-    client.get(urls.tweets + req.params.user, function(error, data, response){
-        if (error) console.error(error);
-        res.send(data);
-    });
 });
 
 module.exports = router;

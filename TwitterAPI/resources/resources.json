@@ -5,25 +5,22 @@
     "port": 8484,
     "api": {
       "name": "RESTful API",
-      "description": "Get access to Twitter's powerful API ."
+      "description": "Get access to Twitter's powerful API as well as data in the db.",
+      "requests": [
+        {"url": "http://localhost:8484/pi/api/twitter/user/:user",
+          "description": "Return user(if exist in couchdb) else request user from Twitter and save in CouchDB."
+        },
+        {
+          "url": "http://localhost:8484/pi/api/famous/all",
+          "description": "Return famous twitter users and their latest tweet."
+        }
+      ]
     }
-  },
-
-  "user": {
-    "screen_name": "",
-    "tweets": [],
-    "description": "",
-    "followers_count": 0,
-    "friends_count": 0,
-    "lang": "",
-    "location": "",
-    "profile_image_url": "",
-    "joined": ""
   },
 
   "database": {
     "name": "twitter",
     "type": "noSQL",
-    "description": "Store all twitter related data with the mashup application."
+    "description": "Store all twitter related data."
   }
 }

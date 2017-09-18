@@ -1,0 +1,20 @@
+{
+  "name": "wot-pi",
+  "version": "1.0.0",
+  "description": "A Simple WoT-Pi AP�I",
+  "main": "wot-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "crypto": "^1.0.1",
+    "express": "^4.15.4",
+    "node-couchdb": "^1.2.0",
+    "oauth-1.0a": "^2.2.2",
+    "request": "^2.81.0",
+    "twitter": "^1.7.1"
+  }
+}

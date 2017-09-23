@@ -11,6 +11,16 @@ var CouchDb = require('node-couchdb');
 var express = require('express'),
     router = express.Router();
 
+// node-couchdb instance talking to external service
+var couchExternal = new CouchDb({
+    host: '127.0.0.1',
+    port: 5984,
+    auth: {
+        user: 'admin',
+        password: 'password'
+    }
+});
+
 var dbName = "twitter";
 var viewUrl = "_design/all/_view/all-view";
 var database = new CouchDb({
@@ -39,7 +49,7 @@ router.route('/user/:user').get(function(req, res, next) {
  Return data on famous people and their most recent tweet.
  */
 router.route('/famous/all').get(function(req, res, next) {
-    database.get(dbName, viewUrl, {include_docs: true}).then(
+    couchExternal.get(dbName, viewUrl, {include_docs: true}).then(
         function(data, headers, status){
             res.json(data.data.rows);
         }, function(err){

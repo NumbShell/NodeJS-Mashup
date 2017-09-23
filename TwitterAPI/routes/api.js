@@ -5,6 +5,7 @@
 /*
     Handle the requests and responses of the UI
  */
+var utils = require('../resources/utils');
 var resources = require('../resources/resources.json');
 var CouchDb = require('node-couchdb');
 var express = require('express'),
@@ -54,12 +55,15 @@ router.route('/delete/:id/rev/:rev').delete(function(req, res, next) {
     var id = req.params.id;
     var rev = req.params.rev;
 
-    console.log(id, rev);
-
-    database.del(dbName, id, rev).then(
-        function(data, headers, status) {
-        res.json(data);
-    },function(err) {
+    //If id and rev have values, proceed.
+    utils.getParams([id, rev]).then(function() {
+        database.del(dbName, id, rev).then(
+            function(data, headers, status) {
+                res.json(data);
+            },function(err) {
+                console.log(err);
+            });
+    }, function(err) {
         console.log(err);
     });
 });

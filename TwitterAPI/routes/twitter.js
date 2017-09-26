@@ -18,10 +18,10 @@ var database = new CouchDb({
 });
 
 var client = new Twitter({
-    consumer_key: '22ouZ9LCMt4YP8SRD7T1rDO4R',
-    consumer_secret: 'V9UgiZdZHEbpT9NAiK4K665GOG1jiTVy0yErwHfoEU9fP88ZZc',
-    access_token_key: '908739473395060738-YeboYHlq4cdQBvbY2SjxJ3HBjLAKsvK',
-    access_token_secret: 'nrm9CLYEJMHj8eF5PgtkTpxXBY05MgQlA5f0gcl7H0KY8'
+    consumer_key: '*',
+    consumer_secret: '*',
+    access_token_key: '*',
+    access_token_secret: '*'
 });
 
 var urls = {

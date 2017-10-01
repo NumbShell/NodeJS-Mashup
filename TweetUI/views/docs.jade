@@ -6,10 +6,11 @@ block content
             div
                 h1 Documentation
                 p Instructions on how to use the API as well as the requests you can make.
+                a(class="btn" href="/") Home
         div(class="requests col-md-7")
             div(class="call")
                 span(class="get methods") GET
-                p http://localhost:8484/pi/api/famous/all
+                p http://192.168.38.102:8484/pi/api/famous/all
                 br
                 p DESC: Return famous twitter users and their latest tweet.
                 form(method="GET" action="/famous/all")
@@ -17,7 +18,7 @@ block content
             br
             div(class="call")
                 span(class="get methods") GET
-                p http://localhost:8484/pi/api/twitter/user/:user
+                p http://192.168.38.102:8484/pi/api/twitter/user/:user
                 p DESC: Return user(if exist in couchdb) else request user from Twitter and save in CouchDB.
                 form(method="POST" action="/user")
                     input(name="nickname" placeholder="nick")

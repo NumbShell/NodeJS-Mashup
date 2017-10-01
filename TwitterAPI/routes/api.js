@@ -13,7 +13,7 @@ var express = require('express'),
     router = express.Router();
 
 //Pouchdb
-var db = new PouchDb('http://192.168.38.102:5984/twitter');
+var db = new PouchDb('http://localhost:5984/twitter');
 
 // node-couchdb instance talking to external service
 var couchExternal = new CouchDb({
@@ -66,7 +66,7 @@ router.route('/famous/all').get(function(req, res, next) {
 });
 
 /*
-    Does not work yet.
+    Does not work.
  */
 router.route('/delete/:id/rev/:rev').delete(function(req, res, next) {
     console.log('delete route');

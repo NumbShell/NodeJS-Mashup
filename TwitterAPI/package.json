@@ -14,6 +14,7 @@
     "express": "^4.15.4",
     "node-couchdb": "^1.2.0",
     "oauth-1.0a": "^2.2.2",
+    "pouchdb": "^6.3.4",
     "request": "^2.81.0",
     "twitter": "^1.7.1"
   }

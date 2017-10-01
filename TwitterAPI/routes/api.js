@@ -8,13 +8,17 @@
 var utils = require('../resources/utils');
 var resources = require('../resources/resources.json');
 var CouchDb = require('node-couchdb');
+var PouchDb = require('pouchdb');
 var express = require('express'),
     router = express.Router();
 
+//Pouchdb
+var db = new PouchDb('http://127.0.0.1:6000/twitter');
+
 // node-couchdb instance talking to external service
 var couchExternal = new CouchDb({
-    host: '127.0.0.1',
-    port: 5984,
+    host: 'localhost',
+    port: 6000,
     auth: {
         user: 'admin',
         password: 'password'
@@ -23,12 +27,6 @@ var couchExternal = new CouchDb({
 
 var dbName = "twitter";
 var viewUrl = "_design/all/_view/all-view";
-var database = new CouchDb({
-    auth: {
-        user: 'admin',
-        password: 'password'
-    }
-});
 
 router.route('/').get(function(req, res, next) {
     /*
@@ -49,12 +47,22 @@ router.route('/user/:user').get(function(req, res, next) {
  Return data on famous people and their most recent tweet.
  */
 router.route('/famous/all').get(function(req, res, next) {
-    couchExternal.get(dbName, viewUrl, {include_docs: true}).then(
+    db.allDocs({
+        include_docs: true,
+        attachments: true
+    }, function(err, response) {
+        if (err) { return console.log(err); }
+        res.send(response);
+    });
+
+    /*
+    database.get({include_docs: true}).then(
         function(data, headers, status){
             res.json(data.data.rows);
         }, function(err){
             if(err) throw err;
         });
+    */
 });
 
 /*
@@ -67,7 +75,7 @@ router.route('/delete/:id/rev/:rev').delete(function(req, res, next) {
 
     //If id and rev have values, proceed.
     utils.getParams([id, rev]).then(function() {
-        database.del(dbName, id, rev).then(
+        couchExternal.del(dbName, id, rev).then(
             function(data, headers, status) {
                 res.json(data);
             },function(err) {

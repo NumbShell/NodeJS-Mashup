@@ -4,9 +4,13 @@
 
 var resources = require('../resources/model');
 var CouchDb = require('node-couchdb');
+var PouchDb = require('pouchdb');
 var Twitter = require('twitter');
 var express = require('express'),
     router = express.Router();
+
+//Pouchdb
+var db = new PouchDb('http://192.168.38.102:5984/twitter');
 
 var dbName = "twitter";
 var viewUrl = "_design/all/_view/all-view";
@@ -33,6 +37,7 @@ var urls = {
     Request user from Twitter's api if it does not already exist in the db.
  */
 router.route('/user/:user').get(function(req, res, next) {
+    /*
     database.get(dbName, viewUrl, {include_docs: true}).then(
         function(data, headers, status){
             console.log(data);
@@ -54,6 +59,7 @@ router.route('/user/:user').get(function(req, res, next) {
         }, function(err){
             if(err) throw err;
         });
+    */
 
     function addUser() {
         client.get(urls.users + req.params.user, function (error, data, response) {
@@ -61,7 +67,7 @@ router.route('/user/:user').get(function(req, res, next) {
             var user = data[0].user;
             var id = String(Math.floor(Math.random()*50000));
 
-            database.insert(resources.database.name, {
+            db.put({
                 _id: id,
                 "name": user.name,
                 "screen_name": user.screen_name,
@@ -73,12 +79,11 @@ router.route('/user/:user').get(function(req, res, next) {
                 "location": user.location,
                 "profile_image_url": user.profile_image_url,
                 "joined": user.created_at
-            }).then(function (data, headers, status) {
-                console.log("Success!");
-                res.json("User added to db");
-            }, function (err) {
-                console.log(err);
-            });
+            }, function(err, response) {
+                if(err) {return console.log(err);}
+                console.log("Added to Database.");
+                res.send("Added to Database.");
+            })
         });
     }
 });

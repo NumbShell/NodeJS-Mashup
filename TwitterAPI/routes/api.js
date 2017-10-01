@@ -13,7 +13,7 @@ var express = require('express'),
     router = express.Router();
 
 //Pouchdb
-var db = new PouchDb('http://127.0.0.1:6000/twitter');
+var db = new PouchDb('http://192.168.38.102:5984/twitter');
 
 // node-couchdb instance talking to external service
 var couchExternal = new CouchDb({
